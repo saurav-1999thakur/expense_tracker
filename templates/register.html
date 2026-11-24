@@ -1,0 +1,72 @@
+{% extends "base.html" %}
+
+{% block title %}Register - Expense Tracker{% endblock %}
+
+{% block content %}
+
+    <section class="auth-section">
+
+        <div class="auth-card">
+
+            <div class="auth-heading">
+                <div class="auth-logo">₹</div>
+                <h2>Create Your Account</h2>
+                <p>Start managing your expenses smarter.</p>
+            </div>
+
+            <form method="POST">
+                {{ form.hidden_tag() }}
+
+                <div class="form-group">
+                    {{ form.username.label }}
+                    {{ form.username(placeholder="Enter your name") }}
+                    {% for error in form.username.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.email.label }}
+                    {{ form.email(placeholder="Enter your email") }}
+                    {% for error in form.email.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.phone.label }}
+                    {{ form.phone(placeholder="Enter your phone number") }}
+                    {% for error in form.phone.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.password.label }}
+                    {{ form.password(placeholder="Create a password") }}
+                    {% for error in form.password.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+
+                <div class="form-group">
+                    {{ form.confirm_password.label }}
+                    {{ form.confirm_password(placeholder="Confirm your password") }}
+                    {% for error in form.confirm_password.errors %}
+                        <span class="error">{{ error }}</span>
+                    {% endfor %}
+                </div>
+                
+                {{ form.submit(class="auth-submit") }}
+            </form>
+
+            <div class="auth-footer">
+                Already have an account?
+                <a href="{{ url_for('login') }}">Login here</a>
+            </div>
+
+        </div>
+
+    </section>
+
+{% endblock %}

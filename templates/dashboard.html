@@ -1,0 +1,164 @@
+{% extends "base.html" %}
+
+{% block title %}Dashboard - Expense Tracker{% endblock %}
+
+{% block content %}
+
+<section class="dashboard-page">
+
+    <!-- Dashboard Header -->
+    <div class="dashboard-header">
+        <div>
+            <span class="dashboard-welcome">OVERVIEW</span>
+            <h1>Welcome! </h1>
+            <p>Here's what's happening with your money.</p>
+        </div>
+
+         <a href="{{ url_for('add_expense') }}" class="add-expense-btn">
+            + Add Expense
+        </a>
+
+    </div>
+
+
+    <!-- Summary Cards -->
+    <div class="summary-grid">
+
+        <div class="summary-card balance-card">
+            <div class="summary-top">
+                <span>Total Balance</span>
+                <div class="summary-icon">₹</div>
+            </div>
+            <h2>₹{{ "%.2f"|format((monthly_income|default(0)|float) - (total_balance|default(0)|float)) }}</h2>
+            <small>Your available balance</small>
+        </div>
+
+        <div class="summary-card income-card">
+            <div class="summary-top">
+                <span>Monthly Income</span>
+                <div class="summary-icon">↗</div>
+            </div>
+            <h2>₹{{ "%.2f"|format(monthly_income|default(0)) }}</h2>
+            <small>Your monthly earnings</small>
+        </div>
+
+        <div class="summary-card expense-card">
+            <div class="summary-top">
+                <span>Monthly Expenses</span>
+                <div class="summary-icon">↘</div>
+            </div>
+
+            <h2>₹{{ "%.2f"|format(total_balance|default(0)) }}</h2>
+            <small>Your monthly spending</small>
+        </div>
+
+    </div>
+
+
+    <!-- Dashboard Content -->
+    <div class="dashboard-content">
+
+        <!-- Expense Overview -->
+        <div class="dashboard-box chart-box">
+
+            <div class="box-header">
+                <div>
+                    <h3>Expense Overview</h3>
+                    <p>Your spending summary</p>
+                </div>
+            </div>
+
+            <div class="dashboard-chart">
+
+                <div class="chart-placeholder">
+                    <div class="chart-column column-1"></div>
+                    <div class="chart-column column-2"></div>
+                    <div class="chart-column column-3"></div>
+                    <div class="chart-column column-4"></div>
+                    <div class="chart-column column-5"></div>
+                    <div class="chart-column column-6"></div>
+                </div>
+
+                <div class="dashboard-chart-labels">
+                    <span>Jan</span>
+                    <span>Feb</span>
+                    <span>Mar</span>
+                    <span>Apr</span>
+                    <span>May</span>
+                    <span>Jun</span>
+                </div>
+
+            </div>
+
+            <p class="chart-note">
+                Sample chart layout. Connect your monthly expense data here.
+            </p>
+
+        </div>
+
+
+        <!-- Quick Actions -->
+        <div class="dashboard-box quick-box">
+
+            <h3>Quick Actions</h3>
+            <p>Manage your finances easily.</p>
+
+             <a href="{{ url_for('add_expense') }}" class="quick-action">
+                <span class="quick-action-icon">＋</span>
+                <div>
+                    <strong>Add Expense</strong>
+                    <small>Record a new transaction</small>
+                </div>
+                <span>→</span>
+            </a>
+
+            <a href="{{ url_for('expenses') }}" class="quick-action">
+                <span class="quick-action-icon">☷</span>
+                <div>
+                    <strong>View Expenses</strong>
+                    <small>See all your transactions</small>
+                </div>
+                <span>→</span>
+            </a>
+
+        </div>
+
+    </div>
+
+
+    <!-- Recent Transactions -->
+    <div class="dashboard-box recent-box">
+
+        <div class="box-header">
+            <div>
+                <h3>Recent Transactions</h3>
+                <p>Your latest expense records</p>
+            </div>
+
+        </div>
+
+        <div class="table-responsive">
+
+            <table class="transaction-table">
+                <thead>
+                    <tr>
+                        <th>Description</th>
+                        <th>Category</th>
+                        <th>Date</th>
+                        <th>Amount</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+
+
+                </tbody>
+            </table>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
