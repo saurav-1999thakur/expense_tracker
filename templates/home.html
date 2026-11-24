@@ -1,0 +1,199 @@
+{% extends 'base.html' %} 
+
+{% block title %}Home - Expense Tracker{% endblock %}
+
+{% block content %}
+
+    <!-- Hero Section -->
+<section class="hero-section">
+
+    <div class="hero-left">
+
+        <span class="tagline">SMART WAY TO MANAGE MONEY</span>
+
+        <h1>
+            Take Control of Your
+            <span>Money.</span>
+        </h1>
+
+        <p>
+            Track your daily spending, manage your budget,
+            and build better financial habits — all in one place.
+            Make smarter financial decisions with Expense Tracker.
+        </p>
+
+        <div class="hero-buttons">
+
+            {% if session.get('user_id') %}
+
+                <a href="{{ url_for('dashboard') }}" class="btn btn-primary">
+                    Go to Dashboard
+                </a>
+
+            {% else %}
+
+                <a href="{{ url_for('register') }}" class="btn btn-primary">
+                    Get Started Free
+                </a>
+
+                <a href="{{ url_for('login') }}" class="btn btn-outline">
+                    Login
+                </a>
+
+            {% endif %}
+
+        </div>
+
+        <div class="trust-text">
+            <span>✓</span> Simple. Secure. Smart Spending.
+        </div>
+
+    </div>
+
+
+    <!-- Dashboard Preview -->
+    <div class="hero-right">
+
+        <div class="dashboard-preview">
+
+            <div class="preview-header">
+                <div>
+                    <small>Monthly Overview</small>
+                    <h2>₹24,580</h2>
+                    <span class="growth">↑ 12.8% compared to last month</span>
+                </div>
+
+                <div class="wallet-icon">₹</div>
+            </div>
+
+            <!-- Chart -->
+            <div class="chart-container">
+                <div class="chart-title">
+                    <span>Expense Activity</span>
+                    <span>This Month</span>
+                </div>
+
+                <div class="chart">
+                    <div class="chart-line"></div>
+                    <div class="chart-bar bar1"></div>
+                    <div class="chart-bar bar2"></div>
+                    <div class="chart-bar bar3"></div>
+                    <div class="chart-bar bar4"></div>
+                    <div class="chart-bar bar5"></div>
+                    <div class="chart-bar bar6"></div>
+                    <div class="chart-bar bar7"></div>
+                </div>
+
+                <div class="chart-labels">
+                    <span>Mon</span>
+                    <span>Tue</span>
+                    <span>Wed</span>
+                    <span>Thu</span>
+                    <span>Fri</span>
+                    <span>Sat</span>
+                    <span>Sun</span>
+                </div>
+            </div>
+
+            <!-- Expense Categories -->
+            <div class="expense-list">
+
+                <h3>Recent Expenses</h3>
+                
+                {% if spend_by_cat %}
+                    {% for category, amount in spend_by_cat.items() %}
+                    <div class="expense-item">
+                        <div class="expense-info">
+                            <div>
+                                <strong>{{ category }}</strong>
+                                <small>Daily expenses</small>
+                            </div>
+                        </div>
+                        <strong>₹{{ amount | default(0) }}</strong>
+                    </div>
+                    {% endfor %}
+                {% else %}
+                    <div class="expense-item">
+                        <strong>No Expenses Found</strong>
+                    </div>
+                {% endif %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Features Section -->
+<section class="features-section">
+
+    <div class="section-heading">
+        <span>WHY CHOOSE US?</span>
+        <h2>Everything You Need to Manage Your Money</h2>
+        <p>Simple tools to help you understand and control your expenses.</p>
+    </div>
+
+    <div class="features-grid">
+
+        <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Track Expenses</h3>
+            <p>
+                Record your daily expenses and keep all your
+                transactions organized in one place.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">💡</div>
+            <h3>Understand Spending</h3>
+            <p>
+                Get a clear overview of where your money goes
+                and identify your spending habits.
+            </p>
+        </div>
+
+        <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Stay on Budget</h3>
+            <p>
+                Monitor your expenses and make smarter
+                decisions to achieve your financial goals.
+            </p>
+        </div>
+
+    </div>
+
+</section>
+
+
+<!-- Bottom CTA -->
+<section class="cta-section">
+
+    <h2>Ready to Manage Your Expenses?</h2>
+
+    <p>
+        Start tracking your money today and take the first step
+        towards better financial management.
+    </p>
+
+    {% if session.get('user_id') %}
+
+        <a href="{{ url_for('dashboard') }}" class="btn btn-white">
+            Open Dashboard
+        </a>
+
+    {% else %}
+
+        <a href="{{ url_for('register') }}" class="btn btn-white">
+            Create Free Account
+        </a>
+
+    {% endif %}
+
+</section>
+
+{% endblock %}

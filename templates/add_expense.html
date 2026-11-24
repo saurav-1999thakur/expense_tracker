@@ -1,0 +1,95 @@
+
+{% extends "base.html" %}
+
+{% block title %}Add Expense | Expense Tracker{% endblock %}
+
+{% block content %}
+
+<section class="add-expense-page">
+
+    <div class="add-expense-container">
+
+        <!-- Page Header -->
+        <div class="add-expense-header">
+            <div>
+                <span class="dashboard-welcome">TRANSACTION MANAGEMENT</span>
+                <h1>Add New Expense</h1>
+                <p>Record your spending and keep your finances organized.</p>
+            </div>
+
+            <a href="{{ url_for('expenses') }}" class="back-btn">
+                ← Back to Expenses
+            </a>
+        </div>
+
+
+        <!-- Expense Form -->
+        <div class="expense-form-card">
+
+            <div class="form-card-heading">
+                <div class="form-heading-icon">₹</div>
+                <div>
+                    <h2>Expense Details</h2>
+                    <p>Enter the details of your transaction below.</p>
+                </div>
+            </div>
+
+
+            <form method="POST">
+
+                {{ form.hidden_tag() }}
+
+                <!-- Description -->
+                <div class="expense-form-group">
+                    {{ form.description.label }}
+                    {{ form.description(class="form-control", placeholder="e.g. Grocery shopping, electricity bill") }}
+                    {% for error in form.description.errors %}
+                        <small class="field-error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+
+                <!-- Amount and Category -->
+                <div class="expense-form-row">
+
+                    <div class="expense-form-group">
+                        {{ form.amount.label }}
+
+                        <div class="amount-input">
+                            <span>₹</span>
+                            {{ form.amount(class="form-control", placeholder="Enter amount", step="0.01", min="0.01") }}
+                        </div>
+
+                        {% for error in form.amount.errors %}
+                            <small class="field-error">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+
+                    <div class="expense-form-group">
+                        {{ form.category.label }}
+                        {{ form.category(class="form-control") }}
+                        {% for error in form.category.errors %}
+                            <small class="field-error">{{ error }}</small>
+                        {% endfor %}
+                    </div>
+
+                </div>
+
+
+                <!-- Buttons -->
+                <div class="expense-form-actions">
+                    <a href="{{ url_for('expenses') }}" class="cancel-btn">
+                        Cancel
+                    </a>
+                    {{ form.submit(class="save-expense-btn") }}
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}

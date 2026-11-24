@@ -1,0 +1,103 @@
+
+{% extends "base.html" %}
+
+{% block title %}Edit Expense | Expense Tracker{% endblock %}
+
+{% block content %}
+
+<section class="edit-expense-page">
+
+    <div class="edit-expense-container">
+
+        <div class="edit-expense-header">
+            <div>
+                <span class="dashboard-welcome">TRANSACTION MANAGEMENT</span>
+                <h1>Edit Expense</h1>
+                <p>Update your transaction details below.</p>
+            </div>
+
+            <a href="{{ url_for('expense_details', expense_id=expense.id) }}"
+               class="back-btn">
+                ← Back to Details
+            </a>
+        </div>
+
+        <div class="edit-expense-card">
+
+            <div class="edit-form-heading">
+                <div class="edit-form-icon">₹</div>
+                <div>
+                    <h2>Update Expense Details</h2>
+                    <p>Modify the information of your transaction.</p>
+                </div>
+            </div>
+
+            <form method="POST">
+
+                {{ form.hidden_tag() }}
+
+                <div class="edit-form-group">
+                    {{ form.description.label }}
+
+                    {{ form.description(
+                        class="form-control",
+                        placeholder="Enter expense description"
+                    ) }}
+
+                    {% for error in form.description.errors %}
+                        <small class="field-error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="edit-form-group">
+                    {{ form.amount.label }}
+
+                    <div class="edit-amount-input">
+                        <span>₹</span>
+
+                        {{ form.amount(
+                            class="form-control",
+                            placeholder="Enter amount",
+                            step="0.01",
+                            min="0.01"
+                        ) }}
+                    </div>
+
+                    {% for error in form.amount.errors %}
+                        <small class="field-error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="edit-form-group">
+                    {{ form.category.label }}
+
+                    {{ form.category(class="form-control") }}
+
+                    {% for error in form.category.errors %}
+                        <small class="field-error">{{ error }}</small>
+                    {% endfor %}
+                </div>
+
+                <div class="edit-form-actions">
+
+                    <a href="{{ url_for('expenses') }}"
+                       class="cancel-edit-btn">
+                        Cancel
+                    </a>
+
+                    {{ form.submit(
+                        class="update-expense-btn",
+                        value="Update Expense"
+                    ) }}
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+{% endblock %}
