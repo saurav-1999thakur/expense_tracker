@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Expense Tracker Web Application
 
 [![Python](https://img.shields.io/badge/Python-3.8+-3776AB?style=for-the-badge&logo=python&logoColor=white)](https://www.python.org/)
@@ -180,3 +181,6 @@ python --version
 ## License
 
 This project is open-source and available under the [MIT License](LICENSE).
+=======
+
+>>>>>>> origin/main
